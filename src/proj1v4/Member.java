@@ -1,6 +1,4 @@
 package src.proj1v4;
-
-
 /**
  * 
  * @author Brahma Dathan and Sarnath Ramnath
@@ -272,4 +270,3 @@ public class Member implements Serializable {
 	}
 
 }
-
