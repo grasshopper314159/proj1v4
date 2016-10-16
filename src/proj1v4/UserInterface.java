@@ -19,7 +19,6 @@ package src.proj1v4;
  * and are not responsible for any loss or damage resulting from its use.
  */
 
- 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -283,12 +282,12 @@ public class UserInterface {
 
 		// Book book = (Book) (issuedBooks.next());
 
-		result = library.renewBook(book.getId(), memberID);
-		if (result != null) {
-			System.out.println(result.getTitle() + "   " + result.getDueDate());
-		} else {
-			System.out.println("Book is not renewable");
-		}
+		// result = library.renewBook(book.getId(), memberID);
+		// if (result != null) {
+		// System.out.println(result.getTitle() + " " + result.getDueDate());
+		// } else {
+		// System.out.println("Book is not renewable");
+		// }
 
 		// Iterator issuedBooks = library.getBooks(memberID);
 
