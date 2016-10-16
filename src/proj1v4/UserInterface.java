@@ -678,6 +678,7 @@ public class UserInterface {
 	}
 
 	/**
+	 * Testing an edit
 	 * The method to start the application. Simply calls process().
 	 * 
 	 * @param args
