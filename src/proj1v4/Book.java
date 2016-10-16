@@ -44,6 +44,7 @@ public class Book implements Serializable {
     this.title = title;
     this.author = author;
     this.id = id;
+    System.out.print("HELLO");
   }
   /**
    * Marks the book as issued to a member
