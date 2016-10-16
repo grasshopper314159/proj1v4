@@ -1,4 +1,4 @@
-package proj1v4;
+package src.proj1v4;
 
 
 /**
@@ -679,7 +679,7 @@ public class UserInterface {
 
 	/**
 	 * Testing an edit
-	 * Testing again2
+	 * Testing again3
 	 * The method to start the application. Simply calls process().
 	 * 
 	 * @param args
