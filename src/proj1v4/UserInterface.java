@@ -1,4 +1,4 @@
-//Test3
+//Test6
 package src.proj1v4;
 /**
  *
@@ -277,31 +277,25 @@ public class UserInterface {
 	 *
 	 */
 	public void renewBooks() {
+
 		Book result;
 		String memberID = sequenceMemberList();
-		String bookID = sequenceMemberCheckedOutList(memberID);
+		do {
+			String bookID = sequenceMemberCheckedOutList(memberID);
 
-		// Book book = (Book) (issuedBooks.next());
+			result = library.renewBook(bookID, memberID);
 
-		// result = library.renewBook(book.getId(), memberID);
-		// if (result != null) {
-		// System.out.println(result.getTitle() + " " + result.getDueDate());
-		// } else {
-		// System.out.println("Book is not renewable");
-		// }
+			if (result != null) {
+				System.out.println(result.getTitle() + " " + result.getDueDate());
+			} else {
+				System.out.println("Book is not renewable");
+			}
+			if (!yesOrNo("Renew more books?")) {
+				break;
+			}
 
-		// Iterator issuedBooks = library.getBooks(memberID);
+		} while (true);
 
-		// while (issuedBooks.hasNext()) {
-		// Book book = (Book) (issuedBooks.next());
-		// if (yesOrNo(book.getTitle())) {
-		// result = li/l) {
-		// System.out.println(result.getTitle() + " " + result.getDueDate());
-		// } else {
-		// System.out.println("Book is not renewable");
-		// }
-		// }
-		// }
 	}
 
 	/**
@@ -389,9 +383,7 @@ public class UserInterface {
 		// New code here:
 		String memberID = sequenceMemberList();
 		String bookID = sequenceCheckedOutList();
-		// String bookID = sequenceAllBooksList();
 
-		// String bookID = getToken("Enter book id");
 		int duration = getNumber("Enter duration of hold");
 		int result = library.placeHold(memberID, bookID, duration);
 		switch (result) {
@@ -420,9 +412,7 @@ public class UserInterface {
 	 */
 	public void removeHold() {
 		String memberID = sequenceMemberList();
-		String bookID = sequenceCheckedOutList();
-		// String bookID = sequenceHasHoldList();
-		// String bookID = getToken("Enter book id");
+		String bookID = sequenceMemberHoldList(memberID);
 
 		int result = library.removeHold(memberID, bookID);
 		switch (result) {
@@ -639,6 +629,27 @@ public class UserInterface {
 			Book localBook = ((Book) books.next());
 
 			System.out.println("   " + i++ + ".   " + localBook.toString());
+		}
+
+		// ************************************************* String
+		// sequenceNumber = getToken("Enter Sequence Number: ");
+		String sequenceNumber = getToken("Enter Sequence Number: ");
+
+		String bookID = Catalog.getBookId(Integer.parseInt(sequenceNumber), Catalog.instance().checkedOutList());
+
+		return bookID;
+
+	}
+
+	public String sequenceMemberHoldList(String memberID) {
+		int i = 1;
+		// ***********************************************
+		// New code here:
+		Iterator holds = Library.instance().getMemberHolds(memberID);
+		for (; holds.hasNext();) {
+			Book localHold = ((Book) holds.next());
+
+			System.out.println("   " + i++ + ".   " + localHold.toString());
 		}
 
 		// ************************************************* String
