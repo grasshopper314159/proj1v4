@@ -1,4 +1,5 @@
 package src.proj1v4;
+
 /**
  * 
  * @author Brahma Dathan and Sarnath Ramnath
@@ -110,6 +111,20 @@ public class Member implements Serializable {
 	 */
 	public Iterator getBooksIssued() {
 		return (booksBorrowed.listIterator());
+	}
+
+	public Iterator getBooksOnHold() {
+		List booksOnHoldList = new LinkedList();
+		for (ListIterator iterator = booksOnHold.listIterator(); iterator.hasNext();) {
+			Hold aHold = (Hold) iterator.next();
+			Book aBook = aHold.getBook();
+			String id = aBook.getId();
+
+			booksOnHoldList.add(aBook);
+
+		}
+
+		return (booksOnHoldList.listIterator());
 	}
 
 	/**
