@@ -253,21 +253,23 @@ public class UserInterface {
 	public void issueBooks() {
 		Book result;
 		String memberID = sequenceMemberList();
-		do {
-			// String bookID = sequenceAllBooksList();
-			String bookID = sequenceNotCheckedOutList();
+		if (memberID != null) {
+			do {
+				// String bookID = sequenceAllBooksList();
+				String bookID = sequenceNotCheckedOutList();
 
-			// String bookID = getToken("Enter book id");
-			result = library.issueBook(memberID, bookID);
-			if (result != null) {
-				System.out.println(result.getTitle() + "   " + result.getDueDate());
-			} else {
-				System.out.println("Book could not be issued");
-			}
-			if (!yesOrNo("Issue more books?")) {
-				break;
-			}
-		} while (true);
+				// String bookID = getToken("Enter book id");
+				result = library.issueBook(memberID, bookID);
+				if (result != null) {
+					System.out.println(result.getTitle() + "   " + result.getDueDate());
+				} else {
+					System.out.println("Book could not be issued");
+				}
+				if (!yesOrNo("Issue more books?")) {
+					break;
+				}
+			} while (true);
+		}
 	}
 
 	/**
@@ -576,23 +578,16 @@ public class UserInterface {
 	 */
 	public String sequenceMemberList() {
 		int i = 1;
-		// ***********************************************
-		// New code here:
+
 		Iterator members = Library.instance().serveIterator();
 		for (; members.hasNext();) {
 
 			System.out.println("   " + i++ + ".   " + members.next().toString());
 
 		}
-		// *************************************************
 		String sequenceNumber = getToken("Enter Sequence Number: ");
 
-		// int numCheck = Integer.parseInt(sequenceNumber);
-
-		// System.out.println("member ID = " + memberID);
-		// String memberID =
-		// library.getMemberId(Integer.parseInt(sequenceNumber));
-		String memberID = library.getMemberId(sequenceNumberCheck(sequenceNumber));
+		String memberID = library.getMemberId(sequenceNumberCheck(sequenceNumber, i));
 		return memberID;
 	}
 
@@ -606,19 +601,16 @@ public class UserInterface {
 
 	public String sequenceCheckedOutList() {
 		int i = 1;
-		// ***********************************************
-		// New code here:
+
 		Iterator books = Catalog.instance().checkedOutList();
 		for (; books.hasNext();) {
 			Book localBook = ((Book) books.next());
 
 			System.out.println("   " + i++ + ".   " + localBook.toString());
 		}
-
-		// *************************************************
 		String sequenceNumber = getToken("Enter Sequence Number: ");
 
-		String bookID = Catalog.getBookId(sequenceNumberCheck(sequenceNumber), Catalog.instance().checkedOutList());
+		String bookID = Catalog.getBookId(sequenceNumberCheck(sequenceNumber, i), Catalog.instance().checkedOutList());
 
 		return bookID;
 
@@ -634,8 +626,7 @@ public class UserInterface {
 
 	public String sequenceNotCheckedOutList() {
 		int i = 1;
-		// ***********************************************
-		// New code here:
+
 		Iterator books = Catalog.instance().notCheckedOutList();
 		for (; books.hasNext();) {
 			Book localBook = ((Book) books.next());
@@ -643,10 +634,10 @@ public class UserInterface {
 			System.out.println("   " + i++ + ".   " + localBook.toString());
 		}
 
-		// *************************************************
 		String sequenceNumber = getToken("Enter Sequence Number: ");
 
-		String bookID = Catalog.getBookId(sequenceNumberCheck(sequenceNumber), Catalog.instance().notCheckedOutList());
+		String bookID = Catalog.getBookId(sequenceNumberCheck(sequenceNumber, i),
+				Catalog.instance().notCheckedOutList());
 
 		return bookID;
 
@@ -661,21 +652,18 @@ public class UserInterface {
 	 */
 
 	public String sequenceMemberCheckedOutList(String memberID) {
-		int i = 1;
-		// ***********************************************
-		// New code here:
+
 		Iterator books = Library.instance().getBooks(memberID);
+		int i = 1;
 		for (; books.hasNext();) {
 			Book localBook = ((Book) books.next());
 
 			System.out.println("   " + i++ + ".   " + localBook.toString());
 		}
 
-		// ************************************************* String
-		// sequenceNumber = getToken("Enter Sequence Number: ");
 		String sequenceNumber = getToken("Enter Sequence Number: ");
 
-		String bookID = Catalog.getBookId(sequenceNumberCheck(sequenceNumber), Catalog.instance().checkedOutList());
+		String bookID = Catalog.getBookId(sequenceNumberCheck(sequenceNumber, i), Catalog.instance().checkedOutList());
 
 		return bookID;
 
@@ -691,8 +679,7 @@ public class UserInterface {
 
 	public String sequenceMemberHoldList(String memberID) {
 		int i = 1;
-		// ***********************************************
-		// New code here:
+
 		Iterator holds = Library.instance().getMemberHolds(memberID);
 		if (holds.hasNext()) {
 			for (; holds.hasNext();) {
@@ -700,12 +687,10 @@ public class UserInterface {
 
 				System.out.println("   " + i++ + ".   " + localHold.toString());
 			}
-
-			// ************************************************* String
-			// sequenceNumber = getToken("Enter Sequence Number: ");
 			String sequenceNumber = getToken("Enter Sequence Number: ");
 
-			String bookID = Catalog.getBookId(sequenceNumberCheck(sequenceNumber), Catalog.instance().checkedOutList());
+			String bookID = Catalog.getBookId(sequenceNumberCheck(sequenceNumber, i),
+					Catalog.instance().checkedOutList());
 
 			return bookID;
 		} else {
@@ -723,8 +708,7 @@ public class UserInterface {
 	 */
 	public String sequenceRemovableList() {
 		int i = 1;
-		// ***********************************************
-		// New code here:
+
 		Iterator books = Catalog.instance().removableList();
 		for (; books.hasNext();) {
 			Book localBook = ((Book) books.next());
@@ -732,10 +716,9 @@ public class UserInterface {
 			System.out.println("   " + i++ + ".   " + localBook.toString());
 		}
 
-		// *************************************************
 		String sequenceNumber = getToken("Enter Sequence Number: ");
 
-		String bookID = Catalog.getBookId(sequenceNumberCheck(sequenceNumber), Catalog.instance().removableList());
+		String bookID = Catalog.getBookId(sequenceNumberCheck(sequenceNumber, i), Catalog.instance().removableList());
 
 		return bookID;
 
@@ -750,8 +733,7 @@ public class UserInterface {
 	 */
 	public String sequenceHasHoldList() {
 		int i = 1;
-		// ***********************************************
-		// New code here:
+
 		Iterator holdBooks = Catalog.instance().hasHoldList();
 		if (holdBooks.hasNext()) {
 			for (; holdBooks.hasNext();) {
@@ -759,11 +741,9 @@ public class UserInterface {
 
 				System.out.println("   " + i++ + ".   " + localBook.toString());
 			}
-
-			// *************************************************
 			String sequenceNumber = getToken("Enter Sequence Number: ");
 
-			String bookID = Catalog.getBookId(sequenceNumberCheck(sequenceNumber), Catalog.instance().hasHoldList());
+			String bookID = Catalog.getBookId(sequenceNumberCheck(sequenceNumber, i), Catalog.instance().hasHoldList());
 
 			return bookID;
 		} else {
@@ -780,24 +760,28 @@ public class UserInterface {
 	 */
 	public String sequenceAllBooksList() {
 		int i = 1;
-		// ***********************************************
-		// New code here:
+
 		Iterator books = Catalog.instance().serveIterator();
 		for (; books.hasNext();) {
 
 			System.out.println("   " + i++ + ".   " + books.next().toString());
 		}
 
-		// *************************************************
 		String sequenceNumber = getToken("Enter Sequence Number: ");
 
-		String bookID = Catalog.getBookId(sequenceNumberCheck(sequenceNumber));
+		String bookID = Catalog.getBookId(sequenceNumberCheck(sequenceNumber, i));
 		System.out.println("book ID = " + bookID);
 		return bookID;
 	}
 
-	public int sequenceNumberCheck(String sequenceNumber) {
-
+	/**
+	 * Method to verify if a sequence number is valid
+	 * 
+	 * @param sequenceNumber
+	 * @return
+	 */
+	public int sequenceNumberCheck(String sequenceNumber, int listSize) {
+		// System.out.println("List Size = " + listSize);
 		int number = 0;
 		try {
 			number = Integer.parseInt(sequenceNumber);
@@ -805,8 +789,16 @@ public class UserInterface {
 			System.out.println("That was not a number ");
 
 		}
-
-		return number;
+		// bounds checking somewhere around here sequence number too high?
+		if ((listSize - 1) >= number) {
+			// System.out.println("Sequence number is ok");
+			return number;
+		} else {
+			// System.out.println("List Size = " + (listSize-1));
+			// System.out.println("Sequence = " + number);
+			System.out.println("Sequence number out of range " + number);
+			return 0;
+		}
 	}
 
 	/**
