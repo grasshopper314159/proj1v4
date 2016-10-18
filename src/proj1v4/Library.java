@@ -270,6 +270,13 @@ public class Library implements Serializable {
 		}
 	}
 
+	/**
+	 * Returns an iterator to the books a member has on hold
+	 * 
+	 * @param memberId
+	 *            member id
+	 * @return iterator to the collection
+	 */
 	public Iterator getMemberHolds(String memberID) {
 		Member member = memberList.search(memberID);
 		if (member == null) {

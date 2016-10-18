@@ -1,4 +1,5 @@
 package src.proj1v4;
+
 /**
  * 
  * @author Brahma Dathan and Sarnath Ramnath
@@ -157,19 +158,20 @@ public class Catalog implements Serializable {
 		return books.toString();
 	}
 
+	/**
+	 * Returns an iterator on the member list
+	 * 
+	 */
 	public Iterator serveIterator() {
-		// return new Iterator memberList.iterator();
+
 		Iterator books = Catalog.instance().getIterator();
 		return books;
 	}
 
-	/*
-	 * public Iterator serveHoldIterator() { // return new Iterator
-	 * memberList.iterator();
+	/**
+	 * Builds a list of books that are checked out. Returns a list iterator
 	 * 
-	 * Iterator<Book> books = holdableList(); return books; }
 	 */
-
 	public Iterator checkedOutList() {
 		List checkedOut = new LinkedList();
 
@@ -184,6 +186,10 @@ public class Catalog implements Serializable {
 		return checkedOut.iterator();
 	}
 
+	/**
+	 * Builds a list of books that are not checked out. Returns a list iterator
+	 * 
+	 */
 	public Iterator notCheckedOutList() {
 		List notCheckedOut = new LinkedList();
 
@@ -198,6 +204,11 @@ public class Catalog implements Serializable {
 		return notCheckedOut.iterator();
 	}
 
+	/**
+	 * Builds a list of books that are both not checked out and not on hold.
+	 * Returns a list iterator
+	 * 
+	 */
 	public Iterator removableList() {
 		List removable = new LinkedList();
 
@@ -208,10 +219,13 @@ public class Catalog implements Serializable {
 			}
 
 		}
-		// TODO Auto-generated method stub
 		return removable.iterator();
 	}
 
+	/**
+	 * Builds a list of books that are on hold. Returns a list iterator
+	 * 
+	 */
 	public Iterator hasHoldList() {
 		List hasHold = new LinkedList();
 
@@ -222,16 +236,26 @@ public class Catalog implements Serializable {
 			}
 
 		}
-		// TODO Auto-generated method stub
+
 		return hasHold.iterator();
 	}
 
+	/**
+	 * Returns a list iterator from the list of books
+	 * 
+	 */
 	private Iterator getIterator() {
-		// TODO Auto-generated method stub
+
 		Iterator<Book> iterator = books.iterator();
 		return iterator;
 	}
 
+	/**
+	 * Method to get the book ID from a book object selected in a sequence list
+	 * 
+	 * @param sequenceNumber
+	 * @return
+	 */
 	public static String getBookId(int sequenceNumber) {
 		int i = 0;
 		Iterator<Book> books = Catalog.instance().getIterator();
@@ -240,7 +264,6 @@ public class Catalog implements Serializable {
 		while (books.hasNext()) {
 			i++;
 			b = books.next();
-			// System.out.println("i #: " + i +" m.getID: " + m.getId());
 
 			if (i == sequenceNumber)
 
@@ -250,6 +273,14 @@ public class Catalog implements Serializable {
 
 	}
 
+	/**
+	 * Method to get the book ID from a book object selected in a sequence list,
+	 * also takes an iterator as a parameter
+	 * 
+	 * 
+	 * @param sequenceNumber
+	 * @return
+	 */
 	public static String getBookId(int sequenceNumber, Iterator iterator) {
 		int i = 0;
 		// Iterator<Book> books = Catalog.instance().getIterator();

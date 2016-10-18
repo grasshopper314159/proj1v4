@@ -567,6 +567,13 @@ public class UserInterface {
 		}
 	}
 
+	/**
+	 * Method to print a list of all members, generates sequence numbers Accepts
+	 * the sequence number entered by the user Returns a string with the
+	 * memberID
+	 * 
+	 * @return
+	 */
 	public String sequenceMemberList() {
 		int i = 1;
 		// ***********************************************
@@ -585,6 +592,14 @@ public class UserInterface {
 
 		return memberID;
 	}
+
+	/**
+	 * Method to print a list of all books in the catalog that are checked out,
+	 * generates sequence numbers Accepts the sequence number entered by the
+	 * user Returns a string with the bookID
+	 * 
+	 * @return
+	 */
 
 	public String sequenceCheckedOutList() {
 		int i = 1;
@@ -606,6 +621,14 @@ public class UserInterface {
 
 	}
 
+	/**
+	 * Method to print a list of all books in the catalog that are not checked
+	 * out, generates sequence numbers Accepts the sequence number entered by
+	 * the user Returns a string with the bookID
+	 * 
+	 * @return
+	 */
+
 	public String sequenceNotCheckedOutList() {
 		int i = 1;
 		// ***********************************************
@@ -625,6 +648,14 @@ public class UserInterface {
 		return bookID;
 
 	}
+
+	/**
+	 * Method to print a list of all books checked out by a particular member,
+	 * generates sequence numbers Accepts the sequence number entered by the
+	 * user Returns a string with the bookID
+	 * 
+	 * @return
+	 */
 
 	public String sequenceMemberCheckedOutList(String memberID) {
 		int i = 1;
@@ -646,6 +677,14 @@ public class UserInterface {
 		return bookID;
 
 	}
+
+	/**
+	 * Method to print a list of all books on hold by a particular member,
+	 * generates sequence numbers Accepts the sequence number entered by the
+	 * user Returns a string with the bookID
+	 * 
+	 * @return
+	 */
 
 	public String sequenceMemberHoldList(String memberID) {
 		int i = 1;
@@ -672,6 +711,13 @@ public class UserInterface {
 
 	}
 
+	/**
+	 * Method to print a list of all books in the catalog that are not checked
+	 * out or on hold, generates sequence numbers Accepts the sequence number
+	 * entered by the user Returns a string with the bookID
+	 * 
+	 * @return
+	 */
 	public String sequenceRemovableList() {
 		int i = 1;
 		// ***********************************************
@@ -692,6 +738,13 @@ public class UserInterface {
 
 	}
 
+	/**
+	 * Method to print a list of all books on hold in the catalog, generates
+	 * sequence numbers Accepts the sequence number entered by the user Returns
+	 * a string with the bookID
+	 * 
+	 * @return
+	 */
 	public String sequenceHasHoldList() {
 		int i = 1;
 		// ***********************************************
@@ -715,6 +768,13 @@ public class UserInterface {
 		}
 	}
 
+	/**
+	 * Method to print a list of all books in the catalog, generates sequence
+	 * numbers Accepts the sequence number entered by the user Returns a string
+	 * with the bookID
+	 * 
+	 * @return
+	 */
 	public String sequenceAllBooksList() {
 		int i = 1;
 		// ***********************************************
