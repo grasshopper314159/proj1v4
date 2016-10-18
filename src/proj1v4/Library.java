@@ -183,6 +183,7 @@ public class Library implements Serializable {
 		if (book == null) {
 			return (BOOK_NOT_FOUND);
 		}
+
 		return member.removeHold(bookId) && book.removeHold(memberId) ? OPERATION_COMPLETED : NO_HOLD_FOUND;
 	}
 
