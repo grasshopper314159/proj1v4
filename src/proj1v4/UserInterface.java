@@ -587,9 +587,12 @@ public class UserInterface {
 		// *************************************************
 		String sequenceNumber = getToken("Enter Sequence Number: ");
 
-		String memberID = library.getMemberId(Integer.parseInt(sequenceNumber));
-		// System.out.println("member ID = " + memberID);
+		// int numCheck = Integer.parseInt(sequenceNumber);
 
+		// System.out.println("member ID = " + memberID);
+		// String memberID =
+		// library.getMemberId(Integer.parseInt(sequenceNumber));
+		String memberID = library.getMemberId(sequenceNumberCheck(sequenceNumber));
 		return memberID;
 	}
 
@@ -615,7 +618,7 @@ public class UserInterface {
 		// *************************************************
 		String sequenceNumber = getToken("Enter Sequence Number: ");
 
-		String bookID = Catalog.getBookId(Integer.parseInt(sequenceNumber), Catalog.instance().checkedOutList());
+		String bookID = Catalog.getBookId(sequenceNumberCheck(sequenceNumber), Catalog.instance().checkedOutList());
 
 		return bookID;
 
@@ -643,7 +646,7 @@ public class UserInterface {
 		// *************************************************
 		String sequenceNumber = getToken("Enter Sequence Number: ");
 
-		String bookID = Catalog.getBookId(Integer.parseInt(sequenceNumber), Catalog.instance().notCheckedOutList());
+		String bookID = Catalog.getBookId(sequenceNumberCheck(sequenceNumber), Catalog.instance().notCheckedOutList());
 
 		return bookID;
 
@@ -672,7 +675,7 @@ public class UserInterface {
 		// sequenceNumber = getToken("Enter Sequence Number: ");
 		String sequenceNumber = getToken("Enter Sequence Number: ");
 
-		String bookID = Catalog.getBookId(Integer.parseInt(sequenceNumber), Catalog.instance().checkedOutList());
+		String bookID = Catalog.getBookId(sequenceNumberCheck(sequenceNumber), Catalog.instance().checkedOutList());
 
 		return bookID;
 
@@ -702,7 +705,7 @@ public class UserInterface {
 			// sequenceNumber = getToken("Enter Sequence Number: ");
 			String sequenceNumber = getToken("Enter Sequence Number: ");
 
-			String bookID = Catalog.getBookId(Integer.parseInt(sequenceNumber), Catalog.instance().checkedOutList());
+			String bookID = Catalog.getBookId(sequenceNumberCheck(sequenceNumber), Catalog.instance().checkedOutList());
 
 			return bookID;
 		} else {
@@ -732,7 +735,7 @@ public class UserInterface {
 		// *************************************************
 		String sequenceNumber = getToken("Enter Sequence Number: ");
 
-		String bookID = Catalog.getBookId(Integer.parseInt(sequenceNumber), Catalog.instance().removableList());
+		String bookID = Catalog.getBookId(sequenceNumberCheck(sequenceNumber), Catalog.instance().removableList());
 
 		return bookID;
 
@@ -760,7 +763,7 @@ public class UserInterface {
 			// *************************************************
 			String sequenceNumber = getToken("Enter Sequence Number: ");
 
-			String bookID = Catalog.getBookId(Integer.parseInt(sequenceNumber), Catalog.instance().hasHoldList());
+			String bookID = Catalog.getBookId(sequenceNumberCheck(sequenceNumber), Catalog.instance().hasHoldList());
 
 			return bookID;
 		} else {
@@ -788,9 +791,22 @@ public class UserInterface {
 		// *************************************************
 		String sequenceNumber = getToken("Enter Sequence Number: ");
 
-		String bookID = Catalog.getBookId(Integer.parseInt(sequenceNumber));
+		String bookID = Catalog.getBookId(sequenceNumberCheck(sequenceNumber));
 		System.out.println("book ID = " + bookID);
 		return bookID;
+	}
+
+	public int sequenceNumberCheck(String sequenceNumber) {
+
+		int number = 0;
+		try {
+			number = Integer.parseInt(sequenceNumber);
+		} catch (NumberFormatException e) {
+			System.out.println("That was not a number ");
+
+		}
+
+		return number;
 	}
 
 	/**
