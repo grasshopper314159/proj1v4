@@ -292,7 +292,7 @@ public class UserInterface {
 		String memberID = sequenceMemberList();
 		do {
 			String bookID = sequenceMemberCheckedOutList(memberID);
-
+			System.out.println(bookID + memberID);
 			result = library.renewBook(bookID, memberID);
 
 			if (result != null) {
@@ -690,7 +690,8 @@ public class UserInterface {
 
 	public String sequenceMemberCheckedOutList(String memberID) {
 
-		Iterator books = Library.instance().getBooks(memberID);
+		// Iterator books = Library.instance().getBooks(memberID);
+		Iterator books = Library.instance().getMemberIssued(memberID);
 		int i = 1;
 		for (; books.hasNext();) {
 			Book localBook = ((Book) books.next());

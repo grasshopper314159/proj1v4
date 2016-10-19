@@ -242,10 +242,12 @@ public class Library implements Serializable {
 	public Book renewBook(String bookId, String memberId) {
 		Book book = catalog.search(bookId);
 		if (book == null) {
+			System.out.println(bookId);
 			return (null);
 		}
 		Member member = memberList.search(memberId);
 		if (member == null) {
+			System.out.println(memberId);
 			return (null);
 		}
 		if ((book.renew(member) && member.renew(book))) {
@@ -283,6 +285,15 @@ public class Library implements Serializable {
 			return (null);
 		} else {
 			return (member.getBooksOnHold());
+		}
+	}
+
+	public Iterator getMemberIssued(String memberID) {
+		Member member = memberList.search(memberID);
+		if (member == null) {
+			return (null);
+		} else {
+			return (member.getBooksIssued());
 		}
 	}
 
