@@ -1,4 +1,4 @@
-//Test6
+//Mayday Mayday Test7
 package src.proj1v4;
 /**
  *
@@ -252,6 +252,7 @@ public class UserInterface {
 	 */
 	public void issueBooks() {
 		Book result;
+		// do {
 		String memberID = sequenceMemberList();
 		if (memberID != null) {
 			do {
@@ -269,7 +270,11 @@ public class UserInterface {
 					break;
 				}
 			} while (true);
+			// if (!yesOrNo("Issue more books?")) {
+			// break;
+			// }
 		}
+		// } while (true);
 	}
 
 	/**
@@ -770,7 +775,7 @@ public class UserInterface {
 		String sequenceNumber = getToken("Enter Sequence Number: ");
 
 		String bookID = Catalog.getBookId(sequenceNumberCheck(sequenceNumber, i));
-		System.out.println("book ID = " + bookID);
+
 		return bookID;
 	}
 
