@@ -387,26 +387,36 @@ public class UserInterface {
 
 		// New code here:
 		String memberID = sequenceMemberList();
-		String bookID = sequenceCheckedOutList();
+		if (memberID != null) {
+			String bookID = sequenceCheckedOutList();
+			if (bookID != null) {
+				int duration = getNumber("Enter duration of hold");
+				int result = library.placeHold(memberID, bookID, duration);
+				switch (result) {
+				case Library.BOOK_NOT_FOUND:
+					System.out.println("No such Book in Library");
+					break;
+				case Library.BOOK_NOT_ISSUED:
+					System.out.println(" Book is not checked out");
+					break;
+				case Library.NO_SUCH_MEMBER:
+					System.out.println("Not a valid member ID");
+					break;
+				case Library.HOLD_PLACED:
+					System.out.println("A hold has been placed");
+					break;
+				default:
+					System.out.println("An error has occurred");
+				}
+			}
 
-		int duration = getNumber("Enter duration of hold");
-		int result = library.placeHold(memberID, bookID, duration);
-		switch (result) {
-		case Library.BOOK_NOT_FOUND:
-			System.out.println("No such Book in Library");
-			break;
-		case Library.BOOK_NOT_ISSUED:
-			System.out.println(" Book is not checked out");
-			break;
-		case Library.NO_SUCH_MEMBER:
-			System.out.println("Not a valid member ID");
-			break;
-		case Library.HOLD_PLACED:
-			System.out.println("A hold has been placed");
-			break;
-		default:
-			System.out.println("An error has occurred");
+			else {
+				System.out.println("Invalid book");
+			}
+		} else {
+			placeHold();
 		}
+
 	}
 
 	/**
@@ -416,32 +426,34 @@ public class UserInterface {
 	 *
 	 */
 	public void removeHold() {
-		// do {
+
 		String memberID = sequenceMemberList();
-		if (memberID != null) {
-			String bookID = sequenceMemberHoldList(memberID);
-			if (bookID != null) {
-				int result = library.removeHold(memberID, bookID);
-				switch (result) {
-				case Library.BOOK_NOT_FOUND:
-					System.out.println("No such Book in Library");
-					break;
-				case Library.NO_SUCH_MEMBER:
-					System.out.println("Not a valid member ID");
-					break;
-				case Library.OPERATION_COMPLETED:
-					System.out.println("The hold has been removed");
-					break;
-				default:
-					System.out.println("An error has occurred");
+		// System.out.println(memberID);
+		if (memberID != "exit") {
+			if (memberID != null) {
+				String bookID = sequenceMemberHoldList(memberID);
+				if (bookID != null) {
+					int result = library.removeHold(memberID, bookID);
+					switch (result) {
+					case Library.BOOK_NOT_FOUND:
+						System.out.println("No such Book in Library");
+						break;
+					case Library.NO_SUCH_MEMBER:
+						System.out.println("Not a valid member ID");
+						break;
+					case Library.OPERATION_COMPLETED:
+						System.out.println("The hold has been removed");
+						break;
+					default:
+						System.out.println("An error has occurred");
+					}
+				} else {
+					System.out.println("No books on hold for this member");
 				}
 			} else {
-				System.out.println("No books on hold for this member");
+				removeHold();
 			}
-		} else {
-			removeHold();
 		}
-		// } while (memberID != null);
 
 	}
 
@@ -596,9 +608,15 @@ public class UserInterface {
 
 		}
 		String sequenceNumber = getToken("Enter Sequence Number: ");
+		int checkedNumber = sequenceNumberCheck(sequenceNumber, i);
 
-		String memberID = library.getMemberId(sequenceNumberCheck(sequenceNumber, i));
-		return memberID;
+		if (checkedNumber != -1) {
+			String memberID = library.getMemberId(checkedNumber);
+			return memberID;
+
+		} else {
+			return "exit";
+		}
 	}
 
 	/**
@@ -800,15 +818,20 @@ public class UserInterface {
 			System.out.println("That was not a number ");
 			return 0;
 		}
-		// bounds checking somewhere around here sequence number too high?
-		if ((listSize - 1) >= number) {
-			// System.out.println("Sequence number is ok");
-			return number;
+
+		if (number != -1) {
+
+			if ((listSize - 1) >= number) {
+
+				return number;
+			} else {
+
+				System.out.println("Sequence number out of range " + number);
+				return 0;
+			}
 		} else {
-			// System.out.println("List Size = " + (listSize-1));
-			// System.out.println("Sequence = " + number);
-			System.out.println("Sequence number out of range " + number);
-			return 0;
+			// System.out.println("Sequence " + number);
+			return -1;
 		}
 	}
 
