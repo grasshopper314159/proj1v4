@@ -392,34 +392,36 @@ public class UserInterface {
 
 		// New code here:
 		String memberID = sequenceMemberList();
-		if (memberID != null) {
-			String bookID = sequenceCheckedOutList();
-			if (bookID != null) {
-				int duration = getNumber("Enter duration of hold");
-				int result = library.placeHold(memberID, bookID, duration);
-				switch (result) {
-				case Library.BOOK_NOT_FOUND:
-					System.out.println("No such Book in Library");
-					break;
-				case Library.BOOK_NOT_ISSUED:
-					System.out.println(" Book is not checked out");
-					break;
-				case Library.NO_SUCH_MEMBER:
-					System.out.println("Not a valid member ID");
-					break;
-				case Library.HOLD_PLACED:
-					System.out.println("A hold has been placed");
-					break;
-				default:
-					System.out.println("An error has occurred");
+		if (memberID != "exit") {
+			if (memberID != null) {
+				String bookID = sequenceCheckedOutList();
+				if (bookID != null) {
+					int duration = getNumber("Enter duration of hold");
+					int result = library.placeHold(memberID, bookID, duration);
+					switch (result) {
+					case Library.BOOK_NOT_FOUND:
+						System.out.println("No such Book in Library");
+						break;
+					case Library.BOOK_NOT_ISSUED:
+						System.out.println(" Book is not checked out");
+						break;
+					case Library.NO_SUCH_MEMBER:
+						System.out.println("Not a valid member ID");
+						break;
+					case Library.HOLD_PLACED:
+						System.out.println("A hold has been placed");
+						break;
+					default:
+						System.out.println("An error has occurred");
+					}
 				}
-			}
 
-			else {
-				System.out.println("Invalid book");
+				else {
+					System.out.println("Invalid book");
+				}
+			} else {
+				placeHold();
 			}
-		} else {
-			placeHold();
 		}
 
 	}
@@ -827,7 +829,7 @@ public class UserInterface {
 		try {
 			number = Integer.parseInt(sequenceNumber);
 		} catch (NumberFormatException e) {
-			System.out.println("That was not a number ");
+			System.out.println("That was not a number, try again \n ");
 			return 0;
 		}
 
