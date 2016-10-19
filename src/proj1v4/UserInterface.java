@@ -350,7 +350,7 @@ public class UserInterface {
 		int result;
 		do {
 			// String bookID = getToken("Enter book id");
-			String bookID = sequenceNotCheckedOutList();
+			String bookID = sequenceRemovableList();
 			result = library.removeBook(bookID);
 			switch (result) {
 			case Library.BOOK_NOT_FOUND:
@@ -416,26 +416,33 @@ public class UserInterface {
 	 *
 	 */
 	public void removeHold() {
+		// do {
 		String memberID = sequenceMemberList();
-		String bookID = sequenceMemberHoldList(memberID);
-		if (bookID != null) {
-			int result = library.removeHold(memberID, bookID);
-			switch (result) {
-			case Library.BOOK_NOT_FOUND:
-				System.out.println("No such Book in Library");
-				break;
-			case Library.NO_SUCH_MEMBER:
-				System.out.println("Not a valid member ID");
-				break;
-			case Library.OPERATION_COMPLETED:
-				System.out.println("The hold has been removed");
-				break;
-			default:
-				System.out.println("An error has occurred");
+		if (memberID != null) {
+			String bookID = sequenceMemberHoldList(memberID);
+			if (bookID != null) {
+				int result = library.removeHold(memberID, bookID);
+				switch (result) {
+				case Library.BOOK_NOT_FOUND:
+					System.out.println("No such Book in Library");
+					break;
+				case Library.NO_SUCH_MEMBER:
+					System.out.println("Not a valid member ID");
+					break;
+				case Library.OPERATION_COMPLETED:
+					System.out.println("The hold has been removed");
+					break;
+				default:
+					System.out.println("An error has occurred");
+				}
+			} else {
+				System.out.println("No books on hold for this member");
 			}
 		} else {
-			System.out.println("No books on hold for this member");
+			removeHold();
 		}
+		// } while (memberID != null);
+
 	}
 
 	/**
