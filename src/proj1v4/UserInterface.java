@@ -253,9 +253,10 @@ public class UserInterface {
 	public void issueBooks() {
 		Book result;
 		// do {
-		String memberID = sequenceMemberList();
-		if (memberID != null) {
-			do {
+
+		do {
+			String memberID = sequenceMemberList();
+			if (memberID != null) {
 				// String bookID = sequenceAllBooksList();
 				String bookID = sequenceNotCheckedOutList();
 
@@ -269,12 +270,9 @@ public class UserInterface {
 				if (!yesOrNo("Issue more books?")) {
 					break;
 				}
-			} while (true);
-			// if (!yesOrNo("Issue more books?")) {
-			// break;
-			// }
-		}
-		// } while (true);
+			}
+		} while (true);
+
 	}
 
 	/**
@@ -315,7 +313,7 @@ public class UserInterface {
 		int result;
 		do {
 			// String bookID = getToken("Enter book id");
-			String bookID = sequenceAllBooksList();
+			String bookID = sequenceCheckedOutList();
 			result = library.returnBook(bookID);
 			switch (result) {
 			case Library.BOOK_NOT_FOUND:
@@ -780,7 +778,8 @@ public class UserInterface {
 	}
 
 	/**
-	 * Method to verify if a sequence number is valid
+	 * Method to verify if a sequence number is valid Catches an exception if a
+	 * non-integer is entered.
 	 * 
 	 * @param sequenceNumber
 	 * @return
@@ -792,7 +791,7 @@ public class UserInterface {
 			number = Integer.parseInt(sequenceNumber);
 		} catch (NumberFormatException e) {
 			System.out.println("That was not a number ");
-
+			return 0;
 		}
 		// bounds checking somewhere around here sequence number too high?
 		if ((listSize - 1) >= number) {
