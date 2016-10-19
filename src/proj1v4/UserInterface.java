@@ -499,16 +499,22 @@ public class UserInterface {
 	public void getTransactions() {
 		Iterator result;
 		String memberID = sequenceMemberList();
-		Calendar date = getDate("Please enter the date for which you want records as mm/dd/yy");
-		result = library.getTransactions(memberID, date);
-		if (result == null) {
-			System.out.println("Invalid Member ID");
-		} else {
-			while (result.hasNext()) {
-				Transaction transaction = (Transaction) result.next();
-				System.out.println(transaction.getType() + "   " + transaction.getTitle() + "\n");
+		if (memberID != "exit") {
+			if (memberID != null) {
+				Calendar date = getDate("Please enter the date for which you want records as mm/dd/yy");
+				result = library.getTransactions(memberID, date);
+				if (result == null) {
+					System.out.println("Invalid Member ID");
+				} else {
+					while (result.hasNext()) {
+						Transaction transaction = (Transaction) result.next();
+						System.out.println(transaction.getType() + "   " + transaction.getTitle() + "\n");
+					}
+					System.out.println("\n  There are no more transactions \n");
+				}
+			} else {
+				getTransactions();
 			}
-			System.out.println("\n  There are no more transactions \n");
 		}
 	}
 
