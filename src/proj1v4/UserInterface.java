@@ -258,11 +258,10 @@ public class UserInterface {
 			if (memberID != null) {
 
 				do {
-
-					// String bookID = sequenceAllBooksList();
 					String bookID = sequenceNotCheckedOutList();
-
-					// String bookID = getToken("Enter book id");
+					if (bookID == "exit") {
+						break;
+					}
 					result = library.issueBook(memberID, bookID);
 					if (result != null) {
 						System.out.println(result.getTitle() + "   " + result.getDueDate());
@@ -516,8 +515,13 @@ public class UserInterface {
 				}
 			} else {
 				getTransactions();
+
+			}
+			if (memberID != "exit") {
+				getTransactions();
 			}
 		}
+
 	}
 
 	/**
@@ -684,11 +688,13 @@ public class UserInterface {
 		String sequenceNumber = getToken("Enter Sequence Number: ");
 		int checkedNumber = sequenceNumberCheck(sequenceNumber, i);
 
-		// if (checkedNumber != -1) {
-		String bookID = Catalog.getBookId(checkedNumber, Catalog.instance().notCheckedOutList());
+		if (checkedNumber != -1) {
+			String bookID = Catalog.getBookId(checkedNumber, Catalog.instance().notCheckedOutList());
 
-		return bookID;
-		// }
+			return bookID;
+		} else {
+			return "exit";
+		}
 
 	}
 
@@ -850,7 +856,7 @@ public class UserInterface {
 				return number;
 			} else {
 
-				System.out.println("Sequence number out of range " + number);
+				System.out.println("Sequence number out of range " + number + "\n");
 				return 0;
 			}
 		} else {
