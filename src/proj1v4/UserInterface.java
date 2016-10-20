@@ -317,8 +317,9 @@ public class UserInterface {
 	public void returnBooks() {
 		int result;
 		do {
-			// String bookID = getToken("Enter book id");
+
 			String bookID = sequenceCheckedOutList();
+
 			result = library.returnBook(bookID);
 			switch (result) {
 			case Library.BOOK_NOT_FOUND:
@@ -342,6 +343,7 @@ public class UserInterface {
 			if (!yesOrNo("Return more books?")) {
 				break;
 			}
+
 		} while (true);
 	}
 
@@ -652,11 +654,13 @@ public class UserInterface {
 		String sequenceNumber = getToken("Enter Sequence Number: ");
 		int checkedNumber = sequenceNumberCheck(sequenceNumber, i);
 
-		// if (checkedNumber != -1) {
-		String bookID = Catalog.getBookId(checkedNumber, Catalog.instance().checkedOutList());
+		if (checkedNumber != -1) {
+			String bookID = Catalog.getBookId(checkedNumber, Catalog.instance().checkedOutList());
 
-		return bookID;
-		// }
+			return bookID;
+		} else {
+			return "exit";
+		}
 	}
 
 	/**
