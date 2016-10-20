@@ -293,7 +293,7 @@ public class UserInterface {
 			if (memberID != null) {
 				do {
 					String bookID = sequenceMemberCheckedOutList(memberID);
-					System.out.println(bookID + memberID);
+					// System.out.println(bookID + memberID);
 					result = library.renewBook(bookID, memberID);
 
 					if (result != null) {
@@ -724,7 +724,7 @@ public class UserInterface {
 
 		String sequenceNumber = getToken("Enter Sequence Number: ");
 		int checkedNumber = sequenceNumberCheck(sequenceNumber, i);
-		String bookID = Catalog.getBookId(checkedNumber, Catalog.instance().hasHoldList());
+		String bookID = Catalog.getBookId(checkedNumber, Catalog.instance().hasBookList());
 		// String bookID = Catalog.getBookId(sequenceNumberCheck(sequenceNumber,
 		// i), Catalog.instance().checkedOutList());
 
@@ -752,6 +752,7 @@ public class UserInterface {
 			}
 			String sequenceNumber = getToken("Enter Sequence Number: ");
 			int checkedNumber = sequenceNumberCheck(sequenceNumber, i);
+			System.out.println(checkedNumber);
 			String bookID = Catalog.getBookId(checkedNumber, Catalog.instance().hasHoldList());
 
 			return bookID;

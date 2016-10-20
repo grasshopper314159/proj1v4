@@ -240,6 +240,20 @@ public class Catalog implements Serializable {
 		return hasHold.iterator();
 	}
 
+	public Iterator hasBookList() {
+		List hasBook = new LinkedList();
+
+		for (Iterator iterator = books.iterator(); iterator.hasNext();) {
+			Book book = (Book) iterator.next();
+			if (book.getBorrower() != null) {
+				hasBook.add(book);
+			}
+
+		}
+
+		return hasBook.iterator();
+	}
+
 	/**
 	 * Returns a list iterator from the list of books
 	 * 
