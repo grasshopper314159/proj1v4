@@ -724,7 +724,8 @@ public class UserInterface {
 
 		String sequenceNumber = getToken("Enter Sequence Number: ");
 		int checkedNumber = sequenceNumberCheck(sequenceNumber, i);
-		String bookID = Catalog.getBookId(checkedNumber, Catalog.instance().hasBookList());
+		Iterator books1 = Library.instance().getMemberIssued(memberID);
+		String bookID = Catalog.getBookId(checkedNumber, books1);
 		// String bookID = Catalog.getBookId(sequenceNumberCheck(sequenceNumber,
 		// i), Catalog.instance().checkedOutList());
 
@@ -753,7 +754,8 @@ public class UserInterface {
 			String sequenceNumber = getToken("Enter Sequence Number: ");
 			int checkedNumber = sequenceNumberCheck(sequenceNumber, i);
 			System.out.println(checkedNumber);
-			String bookID = Catalog.getBookId(checkedNumber, Catalog.instance().hasHoldList());
+			Iterator holds1 = Library.instance().getMemberHolds(memberID);
+			String bookID = Catalog.getBookId(checkedNumber, holds1);
 
 			return bookID;
 		} else {
