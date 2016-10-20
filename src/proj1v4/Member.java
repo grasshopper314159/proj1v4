@@ -176,6 +176,16 @@ public class Member implements Serializable {
 		return (result.iterator());
 	}
 
+	public Iterator getTransactions() {
+		List result = new LinkedList();
+		for (Iterator iterator = transactions.iterator(); iterator.hasNext();) {
+			Transaction transaction = (Transaction) iterator.next();
+			result.add(transaction);
+
+		}
+		return (result.iterator());
+	}
+
 	/**
 	 * Getter for name
 	 * 

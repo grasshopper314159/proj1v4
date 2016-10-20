@@ -364,6 +364,14 @@ public class Library implements Serializable {
 		return member.getTransactions(date);
 	}
 
+	public Iterator getTransactions(String memberId) {
+		Member member = memberList.search(memberId);
+		if (member == null) {
+			return (null);
+		}
+		return member.getTransactions();
+	}
+
 	/**
 	 * Retrieves a deserialized version of the library from disk
 	 * 
