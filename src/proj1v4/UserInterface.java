@@ -508,26 +508,12 @@ public class UserInterface {
 		if (memberID != "exit") {
 			if (memberID != null) {
 				sequenceMemberTransList(memberID);
-				// Calendar date = getDate("Please enter the date for which you
-				// want records as mm/dd/yy");
-				// result = library.getTransactions(memberID, date);
-				// if (result == null) {
-				// System.out.println("Invalid Member ID");
-				// } else {
-				// while (result.hasNext()) {
-				// Transaction transaction = (Transaction) result.next();
-				// System.out.println(transaction.getType() + " " +
-				// transaction.getTitle() + "\n");
-				// }
+
 				System.out.println("\n  There are no more transactions \n");
+				getTransactions();
+			} else {
+				getTransactions();
 			}
-		} else {
-			getTransactions();
-
-		}
-		if (memberID != "exit") {
-			getTransactions();
-
 		}
 
 	}
@@ -844,7 +830,7 @@ public class UserInterface {
 
 	}
 
-	public String sequenceMemberTransList(String memberID) {
+	public void sequenceMemberTransList(String memberID) {
 		int i = 1;
 
 		Iterator books = Library.instance().getTransactions(memberID);
@@ -852,11 +838,11 @@ public class UserInterface {
 
 			System.out.println("   " + i++ + ".   " + books.next().toString());
 		}
-		String sequenceNumber = getToken("Enter Sequence Number: ");
-		int checkedNumber = sequenceNumberCheck(sequenceNumber, i);
-		String bookID = Catalog.getBookId(checkedNumber);
+		// String sequenceNumber = getToken("Enter Sequence Number: ");
+		// int checkedNumber = sequenceNumberCheck(sequenceNumber, i);
+		// String bookID = Catalog.getBookId(checkedNumber);
 
-		return bookID;
+		// return bookID;
 	}
 
 	/**
