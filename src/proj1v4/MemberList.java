@@ -1,4 +1,7 @@
 package src.proj1v4;
+
+import java.io.IOException;
+import java.io.Serializable;
 /**
  *
  * @author Brahma Dathan and Sarnath Ramnath
@@ -18,109 +21,120 @@ package src.proj1v4;
  * The authors do not make any claims regarding the correctness of the code in this module
  * and are not responsible for any loss or damage resulting from its use.
  */
-import java.util.*;
-import java.io.*;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * The collection class for Member objects
+ * 
  * @author Brahma Dathan and Sarnath Ramnath
  *
  */
 public class MemberList implements Serializable {
-  private static final long serialVersionUID = 1L;
-  private List members = new LinkedList();
-  private static MemberList memberList;
-  /*
-   * Private constructor for singleton pattern
-   *
-   */
-  private MemberList() {
-  }
-  /**
-   * Supports the singleton pattern
-   *
-   * @return the singleton object
-   */
-  public static MemberList instance() {
-    if (memberList == null) {
-      return (memberList = new MemberList());
-    } else {
-      return memberList;
-    }
-  }
-  /**
-   * Checks whether a member with a given member id exists.
-   * @param memberId the id of the member
-   * @return true iff member exists
-   *
-   */
-  public Member search(String memberId) {
-    for (Iterator iterator = members.iterator(); iterator.hasNext(); ) {
-      Member member = (Member) iterator.next();
-      if (member.getId().equals(memberId)) {
-        return member;
-      }
-    }
-    return null;
-  }
+	private static final long serialVersionUID = 1L;
+	private List members = new LinkedList();
+	private static MemberList memberList;
 
-  //***********************************************
-  //New code here:
-  public Iterator<Member> getIterator() {
-	  Iterator<Member>  iterator= members.iterator();
-	    return iterator;
-	      }
-//**********************************************************88
+	/*
+	 * Private constructor for singleton pattern
+	 *
+	 */
+	private MemberList() {
+	}
 
+	/**
+	 * Supports the singleton pattern
+	 *
+	 * @return the singleton object
+	 */
+	public static MemberList instance() {
+		if (memberList == null) {
+			return (memberList = new MemberList());
+		} else {
+			return memberList;
+		}
+	}
 
+	/**
+	 * Checks whether a member with a given member id exists.
+	 * 
+	 * @param memberId
+	 *            the id of the member
+	 * @return true iff member exists
+	 *
+	 */
+	public Member search(String memberId) {
+		for (Iterator iterator = members.iterator(); iterator.hasNext();) {
+			Member member = (Member) iterator.next();
+			if (member.getId().equals(memberId)) {
+				return member;
+			}
+		}
+		return null;
+	}
 
-  /**
-   * Inserts a member into the collection
-   * @param member the member to be inserted
-   * @return true iff the member could be inserted. Currently always true
-   */
-  public boolean insertMember(Member member) {
-    members.add(member);
-    return true;
-  }
-  /*
-   * Supports serialization
-   * @param output the stream to be written to
-   */
-  private void writeObject(java.io.ObjectOutputStream output) {
-    try {
-      output.defaultWriteObject();
-      output.writeObject(memberList);
-    } catch(IOException ioe) {
-      ioe.printStackTrace();
-    }
-  }
-  /*
-   * Supports serialization
-   *  @param input the stream to be read from
-   */
-  private void readObject(java.io.ObjectInputStream input) {
-    try {
-      if (memberList != null) {
-        return;
-      } else {
-        input.defaultReadObject();
-        if (memberList == null) {
-          memberList = (MemberList) input.readObject();
-        } else {
-          input.readObject();
-        }
-      }
-    } catch(IOException ioe) {
-      ioe.printStackTrace();
-    } catch(ClassNotFoundException cnfe) {
-      cnfe.printStackTrace();
-    }
-  }
-  /** String form of the collection
-  *
-  */
-  @Override
-  public String toString() {
-    return members.toString();
-  }
+	public Iterator<Member> getIterator() {
+		Iterator<Member> iterator = members.iterator();
+		return iterator;
+	}
+
+	/**
+	 * Inserts a member into the collection
+	 * 
+	 * @param member
+	 *            the member to be inserted
+	 * @return true iff the member could be inserted. Currently always true
+	 */
+	public boolean insertMember(Member member) {
+		members.add(member);
+		return true;
+	}
+
+	/*
+	 * Supports serialization
+	 * 
+	 * @param output the stream to be written to
+	 */
+	private void writeObject(java.io.ObjectOutputStream output) {
+		try {
+			output.defaultWriteObject();
+			output.writeObject(memberList);
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+	}
+
+	/*
+	 * Supports serialization
+	 * 
+	 * @param input the stream to be read from
+	 */
+	private void readObject(java.io.ObjectInputStream input) {
+		try {
+			if (memberList != null) {
+				return;
+			} else {
+				input.defaultReadObject();
+				if (memberList == null) {
+					memberList = (MemberList) input.readObject();
+				} else {
+					input.readObject();
+				}
+			}
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		} catch (ClassNotFoundException cnfe) {
+			cnfe.printStackTrace();
+		}
+	}
+
+	/**
+	 * String form of the collection
+	 *
+	 */
+	@Override
+	public String toString() {
+		return members.toString();
+	}
 }

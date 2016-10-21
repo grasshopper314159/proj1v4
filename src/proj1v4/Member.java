@@ -289,7 +289,6 @@ public class Member implements Serializable {
 	}
 
 	public Iterator serveIterator() {
-		// return new Iterator memberList.iterator();
 		Iterator books = booksOnHold.listIterator();
 		return books;
 	}

@@ -1,4 +1,3 @@
-//Mayday Mayday Test7
 package src.proj1v4;
 /**
  *
@@ -838,11 +837,7 @@ public class UserInterface {
 
 			System.out.println("   " + i++ + ".   " + books.next().toString());
 		}
-		// String sequenceNumber = getToken("Enter Sequence Number: ");
-		// int checkedNumber = sequenceNumberCheck(sequenceNumber, i);
-		// String bookID = Catalog.getBookId(checkedNumber);
 
-		// return bookID;
 	}
 
 	/**
@@ -853,7 +848,7 @@ public class UserInterface {
 	 * @return
 	 */
 	public int sequenceNumberCheck(String sequenceNumber, int listSize) {
-		// System.out.println("List Size = " + listSize);
+
 		int number = 0;
 		try {
 			number = Integer.parseInt(sequenceNumber);
@@ -873,7 +868,7 @@ public class UserInterface {
 				return 0;
 			}
 		} else {
-			// System.out.println("Sequence " + number);
+
 			return -1;
 		}
 	}

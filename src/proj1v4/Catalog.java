@@ -242,7 +242,6 @@ public class Catalog implements Serializable {
 
 	public Iterator hasBookList(String memberID) {
 		List hasBook = new LinkedList();
-		// member.getID(memberID);
 		for (Iterator iterator = books.iterator(); iterator.hasNext();) {
 			Book book = (Book) iterator.next();
 			if (book.getBorrower() != null) {
@@ -274,7 +273,6 @@ public class Catalog implements Serializable {
 		int i = 0;
 		Iterator<Book> books = Catalog.instance().getIterator();
 		Book b = null;
-		// System.out.println("Sequence #: " + sequenceNumber);
 		while (books.hasNext()) {
 			i++;
 			b = books.next();
@@ -297,14 +295,10 @@ public class Catalog implements Serializable {
 	 */
 	public static String getBookId(int sequenceNumber, Iterator iterator) {
 		int i = 0;
-		// Iterator<Book> books = Catalog.instance().getIterator();
 		Book b = null;
-		// System.out.println("Sequence #: " + sequenceNumber);
 		while (iterator.hasNext()) {
 			i++;
 			b = (Book) iterator.next();
-			// System.out.println("i #: " + i +" m.getID: " + m.getId());
-
 			if (i == sequenceNumber)
 
 				return b.getId();
